@@ -13,7 +13,7 @@ export default function SignUp() {
                         Full Name
                     </label>
                     <input 
-                        className='mb-6 p-1.5 text-xs w-full rounded-md border border-secondary focus:outline-none focus:ring-primary focus:ring-1 focus:border-primary'
+                        className='mb-6 p-1.5 text-xs w-full rounded-md border border-secondary focus:outline-none focus:ring-secondary focus:ring-1 focus:border-secondary'
                     />
                 </div>
                 <div>
@@ -23,7 +23,7 @@ export default function SignUp() {
                         Email
                     </label>
                     <input 
-                        className='mb-6 p-1.5 text-xs w-full rounded-md border border-secondary focus:outline-none focus:ring-primary focus:ring-1 focus:border-primary'
+                        className='mb-6 p-1.5 text-xs w-full rounded-md border border-secondary focus:outline-none focus:ring-secondary focus:ring-1 focus:border-secondary'
                     />
                 </div>
                 <div>
@@ -33,7 +33,7 @@ export default function SignUp() {
                         Username
                     </label>
                     <input 
-                        className='mb-6 p-1.5 text-xs w-full rounded-md border border-secondary focus:outline-none focus:ring-primary focus:ring-1 focus:border-primary'
+                        className='mb-6 p-1.5 text-xs w-full rounded-md border border-secondary focus:outline-none focus:ring-secondary focus:ring-1 focus:border-secondary'
                     />
                 </div>
                 <div>
@@ -43,7 +43,7 @@ export default function SignUp() {
                         Password
                     </label>
                     <input 
-                        className='mb-4 p-1.5 text-xs w-full rounded-md border border-secondary focus:outline-none focus:ring-primary focus:ring-1 focus:border-primary'
+                        className='mb-4 p-1.5 text-xs w-full rounded-md border border-secondary focus:outline-none focus:ring-secondary focus:ring-1 focus:border-secondary'
                     />
                 </div>
                 <div>

@@ -10,7 +10,7 @@ export default function AppLayout() {
   }
   return (
     <div className='mb-20'>
-        <div className='fixed bottom-0 flex justify-around border-t border-secondary w-full max-w-[425px]  bg-light2'>
+        <div className='z-10 fixed bottom-0 flex justify-between border-t border-secondary w-full max-w-[425px]  bg-light2'>
           <button type='button' onClick={()=>navigate('/app/dashboard')} className={classNames('group py-1.5 w-20 text-center hover:bg-primary',(location=='/app/dashboard' ? 'bg-primary' : ''))}>
             <svg width="40" height="40" viewBox="0 0 35 35" className={classNames('group-hover:fill-white m-auto' ,(location=='/app/dashboard' ? 'fill-white' : 'fill-primary'))} xmlns="http://www.w3.org/2000/svg">
               <path d="M27.7084 17.5H17.5V7.29166C17.5 6.41666 16.9167 5.83332 16.0417 5.83332C8.75002 5.83332 2.91669 11.6667 2.91669 18.9583C2.91669 26.25 8.75002 32.0833 16.0417 32.0833C23.3334 32.0833 29.1667 26.25 29.1667 18.9583C29.1667 18.0833 28.5834 17.5 27.7084 17.5ZM17.5 29.0208C11.9584 29.8958 6.70835 25.9583 5.97919 20.4167C5.10419 14.875 9.04169 9.62499 14.5834 8.89582V18.9583C14.5834 19.8333 15.1667 20.4167 16.0417 20.4167H26.1042C25.5209 24.9375 22.0209 28.4375 17.5 29.0208ZM21.875 2.91666C21 2.91666 20.4167 3.49999 20.4167 4.37499V13.125C20.4167 14 21 14.5833 21.875 14.5833H30.625C31.5 14.5833 32.0834 14 32.0834 13.125C32.0834 7.43749 27.5625 2.91666 21.875 2.91666ZM23.3334 11.6667V5.97916C26.25 6.56249 28.4375 8.74999 29.0209 11.6667H23.3334Z"/>

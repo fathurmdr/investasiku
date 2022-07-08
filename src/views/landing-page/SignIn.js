@@ -13,7 +13,7 @@ export default function SignIn() {
                         Username / Email
                     </label>
                     <input 
-                        className='mb-6 p-1.5 text-xs w-full rounded-md border border-secondary focus:outline-none focus:ring-primary focus:ring-1 focus:border-primary'
+                        className='mb-6 p-1.5 text-xs w-full rounded-md border border-secondary focus:outline-none focus:ring-secondary focus:ring-1 focus:border-secondary'
                     />
                 </div>
                 <div>
@@ -23,7 +23,7 @@ export default function SignIn() {
                         Password
                     </label>
                     <input 
-                        className='mb-4 p-1.5 text-xs w-full rounded-md border border-secondary focus:outline-none focus:ring-primary focus:ring-1 focus:border-primary'
+                        className='mb-4 p-1.5 text-xs w-full rounded-md border border-secondary focus:outline-none focus:ring-secondary focus:ring-1 focus:border-secondary'
                     />
                 </div>
                 <div>

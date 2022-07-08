@@ -6,6 +6,39 @@ body{
     background-color: #F1E0AC;
     max-width: 425px;
     margin: auto;
+    @apply mb-16;
     /* border-width: 1px; */
     /* border-color: black; */
+}
+
+/* width */
+.scrolltable::-webkit-scrollbar{
+    width: 10px;
+    height: 10px;
+}
+
+/* Track */
+.scrolltable::-webkit-scrollbar-track {
+    @apply bg-transparent;
+}
+
+/* Handle */
+.scrolltable::-webkit-scrollbar-thumb {
+    border: 3px solid transparent;
+    border-radius: 100px;
+    @apply bg-transparent;
+    background-clip: content-box;
+}
+
+/* Handle on hover */
+.scrolltable:hover::-webkit-scrollbar-thumb{
+    @apply bg-secondary;
+}
+
+.scrolltable::-webkit-scrollbar-corner {
+    background: transparent
+}
+
+.scrolltable{
+    @apply ease-in-out
 }
