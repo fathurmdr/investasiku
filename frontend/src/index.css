@@ -253,6 +253,7 @@ input::-webkit-inner-spin-button {
 }
 
 .nav p{
+  margin-top: 2px;
   font-size: x-small;
 }
 

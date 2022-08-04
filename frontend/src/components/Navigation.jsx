@@ -8,7 +8,12 @@ import {
   RiUser3Fill,
   RiUser3Line,
 } from "react-icons/ri";
-import { FaLightbulb, FaRegLightbulb } from "react-icons/fa";
+import {
+  FaLightbulb,
+  FaQuestionCircle,
+  FaRegLightbulb,
+  FaRegQuestionCircle,
+} from "react-icons/fa";
 
 function Navigation() {
   const location = useLocation();
@@ -30,9 +35,9 @@ function Navigation() {
       </button>
       <button className="nav" onClick={() => navigate("/savings")}>
         {location.pathname === "/savings" ? (
-          <FaLightbulb />
+          <FaQuestionCircle />
         ) : (
-          <FaRegLightbulb />
+          <FaRegQuestionCircle />
         )}
         <p>Simulation</p>
       </button>
