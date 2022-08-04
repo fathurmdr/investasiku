@@ -16,9 +16,9 @@ import Investment from "./pages/Investment";
 import InvestmentDetail from "./pages/InvestmentDetail";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
-import Savings from "./pages/Savings";
 import SellInvestment from "./pages/SellInvestment";
 import SignUp from "./pages/SignUp";
+import Simulation from "./pages/Simulation";
 
 function App() {
   const { user } = useSelector((state) => state.auth);
@@ -65,7 +65,7 @@ function App() {
             />
             <Route
               path="/savings"
-              element={user ? <Savings /> : <Navigate to="/login" />}
+              element={user ? <Simulation /> : <Navigate to="/login" />}
             />
             <Route
               path="/profile"

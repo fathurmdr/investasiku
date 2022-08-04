@@ -1,11 +1,11 @@
 import Header from "../components/Header";
 import Navigation from "../components/Navigation";
 
-function Savings() {
+function Simulation() {
   return (
     <>
       <header className="header">
-        <h1>Savings</h1>
+        <h1>Simulation</h1>
       </header>
       <section></section>
       <Navigation />
@@ -13,4 +13,4 @@ function Savings() {
   );
 }
 
-export default Savings;
+export default Simulation;

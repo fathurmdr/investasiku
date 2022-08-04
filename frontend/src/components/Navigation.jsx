@@ -3,13 +3,12 @@ import { useLocation, useNavigate } from "react-router-dom";
 import {
   RiLineChartFill,
   RiLineChartLine,
-  RiMoneyDollarCircleFill,
-  RiMoneyDollarCircleLine,
   RiPieChart2Fill,
   RiPieChart2Line,
   RiUser3Fill,
   RiUser3Line,
 } from "react-icons/ri";
+import { FaLightbulb, FaRegLightbulb } from "react-icons/fa";
 
 function Navigation() {
   const location = useLocation();
@@ -31,11 +30,11 @@ function Navigation() {
       </button>
       <button className="nav" onClick={() => navigate("/savings")}>
         {location.pathname === "/savings" ? (
-          <RiMoneyDollarCircleFill />
+          <FaLightbulb />
         ) : (
-          <RiMoneyDollarCircleLine />
+          <FaRegLightbulb />
         )}
-        <p>Savings</p>
+        <p>Simulation</p>
       </button>
       <button className="nav" onClick={() => navigate("/profile")}>
         {location.pathname === "/profile" ? <RiUser3Fill /> : <RiUser3Line />}
