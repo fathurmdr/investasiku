@@ -1,17 +1,17 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import {
   RiArrowLeftSLine,
   RiDeleteBin5Line,
   RiEdit2Line,
 } from "react-icons/ri";
-import { BiRefresh } from "react-icons/bi";
 import {
   MdOutlineRefresh,
   MdOutlineSell,
   MdOutlineShoppingCart,
 } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   addBuyback,
   deleteInvestmentDetail,
@@ -49,7 +49,7 @@ function InvestmentDetail() {
     investName,
     expectedRate = 0,
     expectedProfit = 0,
-    unit,
+    unit = "unit",
     investmentDetails,
     investmentRate = {
       ratePerDay: 0,
@@ -76,7 +76,12 @@ function InvestmentDetail() {
   }, []);
 
   useEffect(() => {
-    if (investmentById) setInvestmentData(investmentById);
+    setFormBuyback("");
+    if (investmentById) {
+      setInvestmentData(investmentById);
+      if (investmentById.lastBuyback)
+        setFormBuyback(investmentById.lastBuyback);
+    }
     if (isError || !investmentById) navigate("/Page404");
     return () => dispatch(reset());
   }, [investmentById]);
@@ -123,10 +128,13 @@ function InvestmentDetail() {
             : "Data belum tersedia"}
         </p>
         <form onSubmit={onSubmit} className="add-buyback">
-          <label htmlFor="buyBack">Buy back (per {unit && unit})</label>
+          <label htmlFor="buyBack">Harga jual (per {unit && unit})</label>
           <div className="input-btn-buyback">
             <input
               type="number"
+              pattern="[-+]?[0-9]*[.,]?[0-9]+"
+              min={0}
+              step={0.0001}
               id="formBuyback"
               name="formBuyback"
               value={formBuyback}
@@ -179,7 +187,7 @@ function InvestmentDetail() {
                   : "bg-red")
               }
             >
-              <h3>Suku bunga</h3>
+              <h3>Imbal hasil</h3>
               <p>
                 {investmentRate.ratePerYear
                   ? parseFloat(investmentRate.ratePerYear * 100).toFixed(2)
@@ -198,7 +206,11 @@ function InvestmentDetail() {
                   : "bg-red")
               }
             >
-              <h3>Stock to Buy Back</h3>
+              <h3>
+                Harga jual
+                <br />
+                stok saat ini
+              </h3>
               <p>
                 {stockToBuyback.toLocaleString("id-ID", {
                   style: "currency",
@@ -226,9 +238,8 @@ function InvestmentDetail() {
                 <th>Kuantitas Beli/Jual</th>
                 <th>Harga Beli/Jual</th>
                 <th>
-                  Buy back <span>(per {unit})</span>
+                  Harga jual <span>(per {unit})</span>
                 </th>
-                {/* <th>Suku bunga</th> */}
                 <th></th>
               </tr>
             </thead>

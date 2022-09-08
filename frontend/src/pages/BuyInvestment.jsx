@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
@@ -43,7 +44,7 @@ function BuyInvestment() {
     }));
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
 
     const payload = {
@@ -51,10 +52,10 @@ function BuyInvestment() {
       buyForm,
     };
 
-    if (!buyBack || !date || !buyPrice || !quantity) {
+    if (!buyBack || !date || buyPrice === "" || quantity === "") {
       toast.error("Mohon isi semua data! 😣");
     } else {
-      dispatch(buyInvestment(payload));
+      await dispatch(buyInvestment(payload));
       navigate(-1);
     }
   };
@@ -89,6 +90,9 @@ function BuyInvestment() {
               <div className="prefix">Rp</div>
               <input
                 type="number"
+                pattern="[-+]?[0-9]*[.,]?[0-9]+"
+                min={0}
+                step={0.0001}
                 className="form-control"
                 id="buyPrice"
                 name="buyPrice"
@@ -105,6 +109,9 @@ function BuyInvestment() {
               <div className="prefix">{investmentById?.unit}</div>
               <input
                 type="number"
+                pattern="[-+]?[0-9]*[.,]?[0-9]+"
+                min={0}
+                step={0.0001}
                 className="form-control"
                 id="quantity"
                 name="quantity"
@@ -116,11 +123,14 @@ function BuyInvestment() {
             </div>
           </div>
           <div className="form-group">
-            <label htmlFor="buyBack">Buy back</label>
+            <label htmlFor="buyBack">Harga jual per unit</label>
             <div className="with-prefix">
               <div className="prefix">Rp</div>
               <input
                 type="number"
+                pattern="[-+]?[0-9]*[.,]?[0-9]+"
+                min={0}
+                step={0.0001}
                 className="form-control rate"
                 id="buyBack"
                 name="buyBack"

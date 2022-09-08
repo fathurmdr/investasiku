@@ -684,7 +684,7 @@ input::-webkit-inner-spin-button {
 .investment-detail .table-detail table{
   position: relative;
   table-layout: auto;
-  width: 520px;
+  width: 600px;
   font-size: 12px;
   border-spacing: 0px;
   border-collapse: separate;

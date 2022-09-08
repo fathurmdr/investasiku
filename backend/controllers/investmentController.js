@@ -280,6 +280,7 @@ const getInvestmentDetails = asyncHandler(async (req, res) => {
       stock,
       totalPurchases,
       totalSales,
+      lastBuyback,
       stockToBuyback,
     },
   });

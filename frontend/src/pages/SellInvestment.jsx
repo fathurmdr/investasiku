@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
@@ -43,7 +44,7 @@ function SellInvestment() {
     }));
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
 
     const payload = {
@@ -51,10 +52,10 @@ function SellInvestment() {
       sellForm,
     };
 
-    if (!buyBack || !date || !sellPrice || !quantity) {
+    if (!buyBack || !date || sellPrice === "" || quantity === "") {
       toast.error("Mohon isi semua data! 😣");
     } else {
-      dispatch(sellInvestment(payload));
+      await dispatch(sellInvestment(payload));
       navigate(-1);
     }
   };
@@ -89,6 +90,9 @@ function SellInvestment() {
               <div className="prefix">Rp</div>
               <input
                 type="number"
+                pattern="[-+]?[0-9]*[.,]?[0-9]+"
+                min={0}
+                step={0.0001}
                 className="form-control"
                 id="sellPrice"
                 name="sellPrice"
@@ -105,6 +109,9 @@ function SellInvestment() {
               <div className="prefix">{investmentById?.unit}</div>
               <input
                 type="number"
+                pattern="[-+]?[0-9]*[.,]?[0-9]+"
+                min={0}
+                step={0.0001}
                 className="form-control"
                 id="quantity"
                 name="quantity"
@@ -121,6 +128,9 @@ function SellInvestment() {
               <div className="prefix">Rp</div>
               <input
                 type="number"
+                pattern="[-+]?[0-9]*[.,]?[0-9]+"
+                min={0}
+                step={0.0001}
                 className="form-control rate"
                 id="buyBack"
                 name="buyBack"

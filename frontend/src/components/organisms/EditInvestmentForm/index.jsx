@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
@@ -54,7 +55,7 @@ function EditInvestForm() {
     }));
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
 
     const investmentData = {
@@ -68,7 +69,7 @@ function EditInvestForm() {
     if (!investName || !expectedRate || !expectedProfit || !unit) {
       toast.error("Mohon isi semua data! 😣");
     } else {
-      dispatch(editInvestment(investmentData));
+      await dispatch(editInvestment(investmentData));
       navigate(-1);
     }
   };
@@ -91,12 +92,15 @@ function EditInvestForm() {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="expectedRate">Suku bunga yang diharapkan</label>
+          <label htmlFor="expectedRate">Imbal hasil yang diharapkan</label>
 
           <div className="with-prefix">
             <div className="prefix">%</div>
             <input
               type="number"
+              pattern="[-+]?[0-9]*[.,]?[0-9]+"
+              min={0}
+              step={0.01}
               className="form-control"
               id="expectedRate"
               name="expectedRate"
@@ -114,6 +118,9 @@ function EditInvestForm() {
             <div className="prefix">Rp</div>
             <input
               type="number"
+              pattern="[-+]?[0-9]*[.,]?[0-9]+"
+              min={0}
+              step={0.0001}
               className="form-control"
               id="expectedProfit"
               name="expectedProfit"
@@ -132,7 +139,7 @@ function EditInvestForm() {
             name="unit"
             value={unit}
             autoComplete="off"
-            placeholder="gr/slot/%/dll"
+            placeholder="gr/slot/unit/dll"
             onChange={onChange}
           />
         </div>

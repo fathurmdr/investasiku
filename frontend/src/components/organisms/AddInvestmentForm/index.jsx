@@ -1,11 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import {
-  createInvestment,
-  reset,
-} from "../../../features/investment/investmentSlice";
+import { createInvestment } from "../../../features/investment/investmentSlice";
 import Spinner from "../../atoms/Spinner";
 
 function AddInvestmentForm() {
@@ -30,7 +27,7 @@ function AddInvestmentForm() {
     }));
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
 
     const investmentData = {
@@ -43,7 +40,7 @@ function AddInvestmentForm() {
     if (!investName || !expectedRate || !expectedProfit || !unit) {
       toast.error("Mohon isi semua data! 😣");
     } else {
-      dispatch(createInvestment(investmentData));
+      await dispatch(createInvestment(investmentData));
       navigate(-1);
     }
   };
@@ -64,12 +61,15 @@ function AddInvestmentForm() {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="expectedRate">Suku bunga yang diharapkan</label>
+          <label htmlFor="expectedRate">Imbal hasil yang diharapkan</label>
 
           <div className="with-prefix">
             <div className="prefix">%</div>
             <input
               type="number"
+              pattern="[-+]?[0-9]*[.,]?[0-9]+"
+              min={0}
+              step={0.01}
               className="form-control"
               id="expectedRate"
               name="expectedRate"
@@ -87,6 +87,9 @@ function AddInvestmentForm() {
             <div className="prefix">Rp</div>
             <input
               type="number"
+              pattern="[-+]?[0-9]*[.,]?[0-9]+"
+              min={0}
+              step={0.0001}
               className="form-control"
               id="expectedProfit"
               name="expectedProfit"
@@ -104,7 +107,7 @@ function AddInvestmentForm() {
             id="unit"
             name="unit"
             autoComplete="off"
-            placeholder="gr/slot/%/dll"
+            placeholder="gr/slot/unit/dll"
             value={unit}
             onChange={onChange}
           />

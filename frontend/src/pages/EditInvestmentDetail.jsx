@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
@@ -33,6 +34,7 @@ function EditInvestmentDetail() {
     if (!investmentById._id) {
       dispatch(getInvestmentById(investId));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -54,7 +56,7 @@ function EditInvestmentDetail() {
     }));
   };
 
-  const onSubmit = (event) => {
+  const onSubmit = async (event) => {
     event.preventDefault();
 
     const payload = {
@@ -63,11 +65,10 @@ function EditInvestmentDetail() {
       formData,
     };
 
-    if (!buyBack || !date || !price || !quantity) {
+    if (!buyBack || !date || price === "" || quantity === "") {
       toast.error("Mohon isi semua data! 😣");
     } else {
-      dispatch(editInvestmentDetail(payload));
-      console.log(payload);
+      await dispatch(editInvestmentDetail(payload));
       navigate(-1);
     }
   };
@@ -104,6 +105,9 @@ function EditInvestmentDetail() {
               <div className="prefix">Rp</div>
               <input
                 type="number"
+                pattern="[-+]?[0-9]*[.,]?[0-9]+"
+                min={0}
+                step={0.0001}
                 className="form-control"
                 id="price"
                 name="price"
@@ -120,6 +124,9 @@ function EditInvestmentDetail() {
               <div className="prefix">{investmentById?.unit}</div>
               <input
                 type="number"
+                pattern="[-+]?[0-9]*[.,]?[0-9]+"
+                min={0}
+                step={0.0001}
                 className="form-control"
                 id="quantity"
                 name="quantity"
@@ -136,6 +143,9 @@ function EditInvestmentDetail() {
               <div className="prefix">Rp</div>
               <input
                 type="number"
+                pattern="[-+]?[0-9]*[.,]?[0-9]+"
+                min={0}
+                step={0.0001}
                 className="form-control rate"
                 id="buyBack"
                 name="buyBack"
