@@ -1,21 +1,22 @@
 const mongoose = require("mongoose");
+const investmentDetailSchema = require("./investmentDetailModel");
 
-const investmentSchema = mongoose.Schema(
+const investmentSchema = new mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
       ref: "User",
     },
-    invest_name: {
+    investName: {
       type: String,
       required: [true, "Please add a name"],
     },
-    expected_rate: {
+    expectedRate: {
       type: Number,
       required: [true, "Please add expected rate"],
     },
-    expected_profit: {
+    expectedProfit: {
       type: Number,
       required: [true, "Please add expected profit"],
     },
@@ -23,6 +24,7 @@ const investmentSchema = mongoose.Schema(
       type: String,
       required: [true, "Please add investment unit"],
     },
+    investmentDetails: [investmentDetailSchema],
   },
   { timestamps: true }
 );

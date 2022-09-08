@@ -1,14 +1,12 @@
-import Header from "../components/Header";
-import Navigation from "../components/Navigation";
+import Header from "../components/atoms/Header";
+import Navbar from "../components/organisms/Navbar";
 
 function Simulation() {
   return (
     <>
-      <header className="header">
-        <h1>Simulation</h1>
-      </header>
+      <Header title="Simulation" />
       <section></section>
-      <Navigation />
+      <Navbar currentPage="simulation" />
     </>
   );
 }

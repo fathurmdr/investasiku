@@ -1,9 +1,7 @@
-import { useDispatch, useSelector } from "react-redux";
-import Navigation from "../components/Navigation";
+import { useSelector } from "react-redux";
+import Navbar from "../components/organisms/Navbar";
 
 function Dashboard() {
-  const dispatch = useDispatch();
-
   const { user } = useSelector((state) => state.auth);
   return (
     <>
@@ -12,7 +10,7 @@ function Dashboard() {
         <h1>{user.name}</h1>
       </header>
       <section></section>
-      <Navigation />
+      <Navbar currentPage="dashboard" />
     </>
   );
 }

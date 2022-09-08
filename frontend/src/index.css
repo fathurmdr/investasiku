@@ -12,6 +12,20 @@ body {
   background-color: #F1E0AC;
 }
 
+a, a:hover, a:focus, a:active {
+  text-decoration: none;
+}
+
+button, input[type="submit"], input[type="reset"] {
+	background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -206,7 +220,7 @@ input::-webkit-inner-spin-button {
   margin-bottom: 20px;
 }
 
-.auth-footer p button{
+.auth-footer p a{
   background-color: transparent;
   border: none;
   font-weight: bold;
@@ -270,7 +284,7 @@ input::-webkit-inner-spin-button {
   justify-content: right;
 }
 
-.add-investment button{
+.add-investment a{
   width: fit-content;
   height: fit-content;
   background-color: transparent;
@@ -279,13 +293,13 @@ input::-webkit-inner-spin-button {
   margin-right: 10px;
   cursor: pointer;
 }
-.add-investment button svg{
+.add-investment a svg{
   font-size: 55px;
   color: #495371;
   background-color: #F1E0AC;
   border-radius: 100px;
 }
-.add-investment button svg:hover{
+.add-investment a svg:hover{
   color: #74959A;
 }
 
@@ -386,6 +400,28 @@ input::-webkit-inner-spin-button {
   background-color: #74959A;
 }
 
+.loadingSpinnerOverlayContainer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  /* background-color: rgba(116, 149, 154,0.2); */
+  z-index: 5000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loadingSpinnerOverlay {
+  width: 48px;
+  height: 48px;
+  border: 6px solid;
+  border-color:  #495371 #495371 #495371 transparent;
+  border-radius: 50%;
+  animation: spin 1.2s linear infinite;
+}
+
 .loadingSpinnerContainer {
   z-index: 5000;
   display: flex;
@@ -406,7 +442,7 @@ input::-webkit-inner-spin-button {
   border-color: #495371 #495371 #495371 transparent;
 }
 
-.modals .modals-overlay{
+.modals-overlay{
   z-index: 100;
   position: fixed;
   width: 100vw;
@@ -418,7 +454,8 @@ input::-webkit-inner-spin-button {
   background: rgba(0, 0, 0, 0.15);
 }
 
-.modals .modals-overlay .modals-container{
+.modals-container{
+  z-index: 200;
   position: fixed;
   margin: auto;
   padding: 10px 6px;
@@ -433,32 +470,34 @@ input::-webkit-inner-spin-button {
   border-radius: 8px;
   border: #74959A 1px solid;
   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.15);
+  font-size: 14px;
+
 }
 
-.modals .modals-overlay .modals-container p{
+.modals-container p{
   padding: 8px 4px;
 }
-.modals .modals-overlay .modals-container .delete-confirmation{
+.modals-container .delete-confirmation{
   margin: 4px auto;
   width: 50%;
   display: flex;
   justify-content: space-around;
 }
 
-.modals .modals-overlay .modals-container .delete-confirmation button{
+.modals-container .delete-confirmation button{
   width: 50px;
-  padding: 6px 0;
+  padding: 4px 0;
   border: 1px #74959A solid;
   border-radius: 4px;
   cursor: pointer;
   /* box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.15); */
 }
 
-.modals .modals-overlay .modals-container .delete-confirmation .yes{
+.modals-container .delete-confirmation .yes{
   background-color: #f36060;
   color: #fff;
 }
-.modals .modals-overlay .modals-container .delete-confirmation .no{
+.modals-container .delete-confirmation .no{
   background-color: #495371;
   color: #fff;
 }
@@ -466,6 +505,7 @@ input::-webkit-inner-spin-button {
 .investment-detail{
   width: 90%;
   margin: auto;
+  position: relative;
 }
 
 .investment-detail .last-date{
@@ -609,7 +649,8 @@ input::-webkit-inner-spin-button {
 .investment-detail .table-detail{
   overflow: auto;
   margin: auto;
-  max-height: 184px;
+  max-height: 195px;
+  border-bottom: solid 1px #74959A;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -642,7 +683,8 @@ input::-webkit-inner-spin-button {
 
 .investment-detail .table-detail table{
   position: relative;
-  width: 480px;
+  table-layout: auto;
+  width: 520px;
   font-size: 12px;
   border-spacing: 0px;
   border-collapse: separate;
@@ -661,6 +703,7 @@ input::-webkit-inner-spin-button {
 .investment-detail .table-detail table td{
   font-weight: 300;
   padding-top: 10px;
+  
   /* border-bottom: 1px solid #74959A; */
 }
 
@@ -692,7 +735,29 @@ input::-webkit-inner-spin-button {
   margin: 0px 4px;
 }
 
+.reset-detail{
+  position: absolute;
+  right: 0;
+  margin: 4px;
+  padding: 2px 6px 1px 4px;
+  background-color: #f36060;
+  border-radius: 5px;
+  border: solid 1px #74959A;
+  color: #f9f9f9;
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
+.reset-detail:hover{
+  transform: scale(0.98)
+}
+
+.detail-not-found{
+  margin-top: 8px;
+  font-size: 14px;
+}
 
 
 

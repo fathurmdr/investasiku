@@ -14,7 +14,9 @@ import EditInvestment from "./pages/EditInvestment";
 import EditInvestmentDetail from "./pages/EditInvestmentDetail";
 import Investment from "./pages/Investment";
 import InvestmentDetail from "./pages/InvestmentDetail";
+import LandingPage from "./pages/LandingPage";
 import Login from "./pages/Login";
+import Page404 from "./pages/Page404";
 import Profile from "./pages/Profile";
 import SellInvestment from "./pages/SellInvestment";
 import SignUp from "./pages/SignUp";
@@ -27,10 +29,20 @@ function App() {
       <Router>
         <div className="container">
           <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<SignUp />} />
             <Route
               path="/"
+              element={user ? <Navigate to="/dashboard" /> : <LandingPage />}
+            />
+            <Route
+              path="/login"
+              element={user ? <Navigate to="/dashboard" /> : <Login />}
+            />
+            <Route
+              path="/signup"
+              element={user ? <Navigate to="/dashboard" /> : <SignUp />}
+            />
+            <Route
+              path="/dashboard"
               element={user ? <Dashboard /> : <Navigate to="/login" />}
             />
             <Route
@@ -64,13 +76,15 @@ function App() {
               }
             />
             <Route
-              path="/savings"
+              path="/simulation"
               element={user ? <Simulation /> : <Navigate to="/login" />}
             />
             <Route
               path="/profile"
               element={user ? <Profile /> : <Navigate to="/login" />}
             />
+            <Route path="/Page404" element={<Page404 />} />
+            <Route path="*" element={<Navigate to="/Page404" />} />
           </Routes>
         </div>
       </Router>

@@ -1,6 +1,6 @@
 import { RiArrowRightSLine } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
-import MenuOption from "./MenuOption";
+// import MenuOption from "./MenuOption";
 
 function ListMenu(props) {
   const navigate = useNavigate();
@@ -15,7 +15,7 @@ function ListMenu(props) {
             </div>
 
             {/* option button */}
-            {props.optionButton && <MenuOption _id={el._id} />}
+            {/* {props.optionButton && <MenuOption _id={el._id} />} */}
           </li>
         ))}
     </div>

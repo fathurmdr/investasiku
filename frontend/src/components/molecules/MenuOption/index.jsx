@@ -3,9 +3,11 @@ import { HiDotsVertical } from "react-icons/hi";
 import { RiDeleteBin5Line, RiEdit2Line } from "react-icons/ri";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { deleteInvestment } from "../features/investment/investmentSlice";
+import { deleteInvestment } from "../../../features/investment/investmentSlice";
+import Modal from "../Modal";
 
 function MenuOption(props) {
+  const { _id } = props;
   const [isOpen, setIsOpen] = useState(false);
   const [isDeleteModal, setIsDeleteModal] = useState(false);
 
@@ -13,15 +15,11 @@ function MenuOption(props) {
   const navigate = useNavigate();
 
   let menuRef = useRef();
-  let deleteRef = useRef();
 
   useEffect(() => {
     document.addEventListener("mousedown", (event) => {
       if (!menuRef.current?.contains(event.target)) {
         setIsOpen(false);
-      }
-      if (!deleteRef.current?.contains(event.target)) {
-        setIsDeleteModal(false);
       }
     });
   }, []);
@@ -40,7 +38,7 @@ function MenuOption(props) {
       {isOpen && (
         <div className="options">
           {/* edit option */}
-          <div className="edit" onClick={() => navigate("./edit/" + props._id)}>
+          <div className="edit" onClick={() => navigate("./edit/" + _id)}>
             <RiEdit2Line /> Edit
           </div>
 
@@ -60,30 +58,25 @@ function MenuOption(props) {
         </div>
       )}
 
-      {isDeleteModal && (
-        <div className="modals">
-          <div className="modals-overlay">
-            <div ref={deleteRef} className="modals-container">
-              {/* content */}
-              <p>Apakah anda ingin menghapus investasi ini?</p>
-              <div className="delete-confirmation">
-                <button
-                  className="yes"
-                  onClick={() => dispatch(deleteInvestment(props._id))}
-                >
-                  Ya
-                </button>
-                <button
-                  className="no"
-                  onClick={() => setIsDeleteModal(!isDeleteModal)}
-                >
-                  Tidak
-                </button>
-              </div>
-            </div>
-          </div>
+      {/* delete confirmation */}
+      <Modal isOpen={isDeleteModal} setIsOpen={setIsDeleteModal}>
+        {/* content */}
+        <p>Apakah anda ingin menghapus investasi ini?</p>
+        <div className="delete-confirmation">
+          <button
+            className="yes"
+            onClick={() => dispatch(deleteInvestment(_id))}
+          >
+            Ya
+          </button>
+          <button
+            className="no"
+            onClick={() => setIsDeleteModal(!isDeleteModal)}
+          >
+            Tidak
+          </button>
         </div>
-      )}
+      </Modal>
     </div>
   );
 }

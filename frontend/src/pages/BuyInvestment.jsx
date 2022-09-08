@@ -3,40 +3,43 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import DatePicker from "react-datepicker";
-import Spinner from "../components/Spinner";
 import SubHeader from "../components/SubHeader";
 import { MdOutlineDateRange } from "react-icons/md";
-import { buyInvestment } from "../features/investmentDetail/investmentDetailSlice";
+import {
+  buyInvestment,
+  getInvestmentById,
+} from "../features/investment/investmentSlice";
+import Spinner from "../components/atoms/Spinner";
+import SpinnerOverlay from "../components/atoms/SpinnerOverlay";
 
 function BuyInvestment() {
-  const [investmentById, setInvestmentById] = useState(undefined);
   const [buyForm, setBuyForm] = useState({
-    buy_back: "",
+    buyBack: "",
     date: new Date(),
-    buy_price: "",
+    buyPrice: "",
     quantity: "",
   });
 
-  const { buy_back, date, buy_price, quantity } = buyForm;
-
+  const { buyBack, date, buyPrice, quantity } = buyForm;
   const { investId } = useParams();
+
+  const { investmentById, isLoading } = useSelector(
+    (state) => state.investment
+  );
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { investments } = useSelector((state) => state.investment);
-  const { isLoading } = useSelector((state) => state.investmentDetail);
-
   useEffect(() => {
-    if (investments) {
-      setInvestmentById(investments.filter((el) => el._id === investId)[0]);
+    if (!investmentById._id) {
+      dispatch(getInvestmentById(investId));
     }
-  }, [investments]);
+  }, []);
 
-  const onChange = (e) => {
+  const onChange = (event) => {
     setBuyForm((prevState) => ({
       ...prevState,
-      [e.target.name]: e.target.value,
+      [event.target.name]: event.target.value,
     }));
   };
 
@@ -48,13 +51,14 @@ function BuyInvestment() {
       buyForm,
     };
 
-    if (!buy_back || !date || !buy_price || !quantity) {
+    if (!buyBack || !date || !buyPrice || !quantity) {
       toast.error("Mohon isi semua data! 😣");
     } else {
       dispatch(buyInvestment(payload));
       navigate(-1);
     }
   };
+  if (isLoading) return <SpinnerOverlay />;
   return (
     <>
       <SubHeader subHeaderName="Beli" />
@@ -80,15 +84,15 @@ function BuyInvestment() {
             </div>
           </div>
           <div className="form-group">
-            <label htmlFor="buy_price">Harga beli</label>
+            <label htmlFor="buyPrice">Harga beli</label>
             <div className="with-prefix">
               <div className="prefix">Rp</div>
               <input
                 type="number"
                 className="form-control"
-                id="buy_price"
-                name="buy_price"
-                value={buy_price}
+                id="buyPrice"
+                name="buyPrice"
+                value={buyPrice}
                 autoComplete="off"
                 placeholder="total harga pembelian"
                 onChange={onChange}
@@ -112,15 +116,15 @@ function BuyInvestment() {
             </div>
           </div>
           <div className="form-group">
-            <label htmlFor="buy_back">Buy back</label>
+            <label htmlFor="buyBack">Buy back</label>
             <div className="with-prefix">
               <div className="prefix">Rp</div>
               <input
                 type="number"
                 className="form-control rate"
-                id="buy_back"
-                name="buy_back"
-                value={buy_back}
+                id="buyBack"
+                name="buyBack"
+                value={buyBack}
                 autoComplete="off"
                 placeholder={`harga buy back per ${investmentById?.unit}`}
                 onChange={onChange}

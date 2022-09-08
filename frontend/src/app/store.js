@@ -9,4 +9,5 @@ export const store = configureStore({
     investment: investmentReducer,
     investmentDetail: investmentDetailReducer,
   },
+  devTools: process.env.NODE_ENV !== "production",
 });

@@ -1,12 +1,7 @@
 const mongoose = require("mongoose");
 
-const investmentDetailSchema = mongoose.Schema(
+const investmentDetailSchema = new mongoose.Schema(
   {
-    investment: {
-      type: mongoose.Schema.Types.ObjectId,
-      required: true,
-      ref: "Investment",
-    },
     date: {
       type: Date,
       default: Date.now,
@@ -19,7 +14,7 @@ const investmentDetailSchema = mongoose.Schema(
       type: Number,
       default: 0,
     },
-    buy_back: {
+    buyBack: {
       type: Number,
       default: 0,
     },
@@ -27,4 +22,4 @@ const investmentDetailSchema = mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("InvestmentDetail", investmentDetailSchema);
+module.exports = investmentDetailSchema;

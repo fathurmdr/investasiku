@@ -1,8 +1,8 @@
+import { RiArrowRightSLine } from "react-icons/ri";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import Header from "../components/Header";
-import ListMenu from "../components/ListMenu";
-import Navigation from "../components/Navigation";
+import Header from "../components/atoms/Header";
+import Navbar from "../components/organisms/Navbar";
 import { logout, reset } from "../features/auth/authSlice";
 
 const listMenu = [
@@ -27,21 +27,39 @@ function Profile() {
   const onLogout = () => {
     dispatch(logout());
     dispatch(reset());
-    navigate("/");
+    navigate("/login");
   };
   return (
     <>
-      <header className="header">
-        <h1>Profile</h1>
-      </header>
+      <Header title="Profile" />
+
       <section className="profile-menu">
-        <ListMenu menu={listMenu} headerName="Profile" />
+        <div className="list-menu">
+          <li>
+            <div className="detail">
+              <p>Ubah Profil</p>
+              <RiArrowRightSLine />
+            </div>
+          </li>
+          <li>
+            <div className="detail">
+              <p>Hapus Akun</p>
+              <RiArrowRightSLine />
+            </div>
+          </li>
+          <li>
+            <div className="detail">
+              <p>Tentang Aplikasi</p>
+              <RiArrowRightSLine />
+            </div>
+          </li>
+        </div>
         <button type="button" onClick={onLogout} className="btn btn-logout">
           Logout
         </button>
       </section>
 
-      <Navigation />
+      <Navbar currentPage="profile" />
     </>
   );
 }

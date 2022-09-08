@@ -3,66 +3,77 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import DatePicker from "react-datepicker";
-import Spinner from "../components/Spinner";
 import SubHeader from "../components/SubHeader";
 import { MdOutlineDateRange } from "react-icons/md";
-import { editInvestmentDetail } from "../features/investmentDetail/investmentDetailSlice";
+import Spinner from "../components/atoms/Spinner";
+import {
+  editInvestmentDetail,
+  getInvestmentById,
+} from "../features/investment/investmentSlice";
+import SpinnerOverlay from "../components/atoms/SpinnerOverlay";
 
 function EditInvestmentDetail() {
-  const { investId, investDetailId } = useParams();
-  const { investments } = useSelector((state) => state.investment);
-  const { isLoading, investmentDetails } = useSelector(
-    (state) => state.investmentDetail
-  );
-  const [investmentById, setInvestmentById] = useState(undefined);
-  const [editInvestDetailForm, setEditInvestDetailForm] = useState({
-    ...investmentDetails.filter((el) => el._id === investDetailId)[0],
-    // buy_back: "",
-    date: new Date(
-      investmentDetails.filter((el) => el._id === investDetailId)[0].date
-    ),
-    // price: "",
-    // quantity: "",
+  const [formData, setFormData] = useState({
+    buyBack: "",
+    date: new Date(),
+    price: "",
+    quantity: "",
   });
 
-  const { buy_back, date, price, quantity } = editInvestDetailForm;
+  const { buyBack, date, price, quantity } = formData;
+  const { investId, investDetailId } = useParams();
+  const { investmentById, isLoading } = useSelector(
+    (state) => state.investment
+  );
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (investments) {
-      setInvestmentById(investments.filter((el) => el._id === investId)[0]);
-      setEditInvestDetailForm((prevState) => ({
-        ...prevState,
-        investment: investId,
-      }));
+    if (!investmentById._id) {
+      dispatch(getInvestmentById(investId));
     }
-  }, [investments]);
+  }, []);
 
-  const onChange = (e) => {
-    setEditInvestDetailForm((prevState) => ({
+  useEffect(() => {
+    if (investmentById._id) {
+      const investmentDetailById = investmentById.investmentDetails.filter(
+        (el) => el._id === investDetailId
+      )[0];
+      setFormData({
+        ...investmentDetailById,
+        date: new Date(investmentDetailById.date),
+      });
+    }
+  }, [investmentById]);
+
+  const onChange = (event) => {
+    setFormData((prevState) => ({
       ...prevState,
-      [e.target.name]: e.target.value,
+      [event.target.name]: event.target.value,
     }));
   };
 
-  const onSubmit = (e) => {
-    e.preventDefault();
+  const onSubmit = (event) => {
+    event.preventDefault();
 
     const payload = {
       investId,
       investDetailId,
-      editInvestDetailForm,
+      formData,
     };
 
-    if (!buy_back || !date || !price || !quantity) {
+    if (!buyBack || !date || !price || !quantity) {
       toast.error("Mohon isi semua data! 😣");
     } else {
       dispatch(editInvestmentDetail(payload));
+      console.log(payload);
       navigate(-1);
     }
   };
+
+  if (isLoading) return <SpinnerOverlay />;
+
   return (
     <>
       <SubHeader subHeaderName="Edit Investment Detail" />
@@ -79,7 +90,7 @@ function EditInvestmentDetail() {
                 dateFormat="dd/MM/yyyy"
                 selected={date}
                 onChange={(date) =>
-                  setEditInvestDetailForm((prevState) => ({
+                  setFormData((prevState) => ({
                     ...prevState,
                     date,
                   }))
@@ -88,14 +99,14 @@ function EditInvestmentDetail() {
             </div>
           </div>
           <div className="form-group">
-            <label htmlFor="buy_price">Harga Beli/Jual</label>
+            <label htmlFor="price">Harga Beli/Jual</label>
             <div className="with-prefix">
               <div className="prefix">Rp</div>
               <input
                 type="number"
                 className="form-control"
-                id="buy_price"
-                name="buy_price"
+                id="price"
+                name="price"
                 value={price}
                 autoComplete="off"
                 placeholder="total harga pembelian"
@@ -120,15 +131,15 @@ function EditInvestmentDetail() {
             </div>
           </div>
           <div className="form-group">
-            <label htmlFor="buy_back">Buy back</label>
+            <label htmlFor="buyBack">Buy back</label>
             <div className="with-prefix">
               <div className="prefix">Rp</div>
               <input
                 type="number"
                 className="form-control rate"
-                id="buy_back"
-                name="buy_back"
-                value={buy_back}
+                id="buyBack"
+                name="buyBack"
+                value={buyBack}
                 autoComplete="off"
                 placeholder={`harga buy back per ${investmentById?.unit}`}
                 onChange={onChange}

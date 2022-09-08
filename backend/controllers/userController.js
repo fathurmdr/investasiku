@@ -29,7 +29,6 @@ const registerUser = asyncHandler(async (req, res) => {
   // Create user
   const user = await User.create({
     name,
-    user_role: "user",
     email,
     password: hashedPassword,
   });
@@ -38,9 +37,7 @@ const registerUser = asyncHandler(async (req, res) => {
     res.status(201).json({
       _id: user._id,
       name: user.name,
-      user_role: user.user_role,
       email: user.email,
-      token: generateToken(user._id),
     });
   } else {
     res.status(400);
@@ -64,11 +61,7 @@ const loginUser = asyncHandler(async (req, res) => {
 
   if (user && (await bcrypt.compare(password, user.password))) {
     res.json({
-      _id: user._id,
-      name: user.name,
-      user_role: user.user_role,
-      email: user.email,
-      token: generateToken(user._id),
+      token: generateToken(user._id, user.name, user.email),
     });
   } else {
     res.status(400);
@@ -84,7 +77,6 @@ const getUser = asyncHandler(async (req, res) => {
     res.json({
       id: req.user.id,
       name: req.user.name,
-      user_role: req.user.user_role,
       email: req.user.email,
     });
   } else {
@@ -93,8 +85,8 @@ const getUser = asyncHandler(async (req, res) => {
   }
 });
 
-const generateToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET, {
+const generateToken = (_id, name, email) => {
+  return jwt.sign({ _id, name, email }, process.env.JWT_SECRET, {
     expiresIn: "30d",
   });
 };

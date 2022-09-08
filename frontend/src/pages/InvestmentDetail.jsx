@@ -4,155 +4,102 @@ import {
   RiDeleteBin5Line,
   RiEdit2Line,
 } from "react-icons/ri";
-import { MdOutlineSell, MdOutlineShoppingCart } from "react-icons/md";
+import { BiRefresh } from "react-icons/bi";
+import {
+  MdOutlineRefresh,
+  MdOutlineSell,
+  MdOutlineShoppingCart,
+} from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
-import { getInvestments } from "../features/investment/investmentSlice";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import {
   addBuyback,
-  calculateRate,
   deleteInvestmentDetail,
-  getInvestmentDetails,
+  getInvestmentById,
   reset,
-} from "../features/investmentDetail/investmentDetailSlice";
+  resetInvestmentDetail,
+} from "../features/investment/investmentSlice";
 import { toast } from "react-toastify";
+import SpinnerOverlay from "../components/atoms/SpinnerOverlay";
+import Modal from "../components/molecules/Modal";
 
 function InvestmentDetail() {
-  // array investDetails
-  // investment
-
-  // lastDate (lastInvestDetails.date)
-  // buyBack
-  // stock (totalqty sum(investDetails.qty))
-  // unit (investment.unit)
-  // totalPembelian (sum(investDetails.harga+))
-  // totalPenjualan (sum(investDetails.harga-))
-  // sukuBunga (calculateRate(investDetails))
-  // stockBuyback (stock * lastBuyback)
-
-  const [investmentById, setInvestmentById] = useState(undefined);
   const [investmentData, setInvestmentData] = useState({
     investName: "",
-    lastDate: "",
-    buyBack: "",
-    stock: 0,
+    expectedRate: 0,
+    expectedProfit: 0,
     unit: "",
-    totalPembelian: 0,
-    totalPenjualan: 0,
-    sukuBunga: 0,
-    stockBuyback: 0,
+    investmentDetails: [],
+    investmentRate: {
+      ratePerDay: 0,
+      ratePerMonth: 0,
+      ratePerYear: 0,
+    },
+    lastDate: "",
+    stock: 0,
+    totalPurchases: 0,
+    totalSales: 0,
+    stockToBuyback: 0,
   });
+  const [formBuyback, setFormBuyback] = useState("");
+  const [isModalDelete, setIsModalDelete] = useState(false);
+  const [isModalReset, setIsModalReset] = useState(false);
 
   const {
     investName,
-    lastDate,
-    buyBack,
-    stock,
+    expectedRate = 0,
+    expectedProfit = 0,
     unit,
-    totalPembelian,
-    totalPenjualan,
-    sukuBunga,
-    stockBuyback,
+    investmentDetails,
+    investmentRate = {
+      ratePerDay: 0,
+      ratePerMonth: 0,
+      ratePerYear: 0,
+    },
+    lastDate = "",
+    stock = 0,
+    totalPurchases = 0,
+    totalSales = 0,
+    stockToBuyback = 0,
   } = investmentData;
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const { investId } = useParams();
-  const { investments } = useSelector((state) => state.investment);
-  const { investmentDetails, rates } = useSelector(
-    (state) => state.investmentDetail
+  const { investmentById, isLoading, isError } = useSelector(
+    (state) => state.investment
   );
 
   useEffect(() => {
-    dispatch(getInvestmentDetails({ investId }));
-    dispatch(getInvestments());
+    dispatch(getInvestmentById(investId));
   }, []);
 
   useEffect(() => {
-    if (investments) {
-      setInvestmentById(investments.filter((el) => el._id === investId)[0]);
-    }
+    if (investmentById) setInvestmentData(investmentById);
+    if (isError || !investmentById) navigate("/Page404");
+    return () => dispatch(reset());
+  }, [investmentById]);
 
-    if (investmentById && investmentDetails) {
-      setInvestmentData((prevState) => ({
-        ...prevState,
-        investName: investmentById.invest_name,
-        lastDate: investmentDetails.slice(-1)[0]?.date
-          ? new Date(investmentDetails.slice(-1)[0].date)
-          : "",
-        stock: investmentDetails.reduce(
-          (result, el) => result + el.quantity,
-          0
-        ),
-        unit: investmentById.unit,
-        totalPembelian: investmentDetails.reduce(
-          (result, el) => result + (el.price > 0 ? el.price : 0),
-          0
-        ),
-        totalPenjualan: investmentDetails.reduce(
-          (result, el) => result + (el.price < 0 ? el.price * -1 : 0),
-          0
-        ),
-        stockBuyback:
-          investmentDetails.reduce((result, el) => result + el.quantity, 0) *
-          investmentDetails.slice(-1)[0]?.buy_back,
-      }));
-    }
-  }, [investmentDetails, investments]);
-
-  useEffect(() => {
-    if (investmentDetails.length > 0 && lastDate !== "") {
-      dispatch(
-        calculateRate([
-          ...investmentDetails,
-          {
-            date: lastDate,
-            price: -stockBuyback,
-          },
-        ])
-      );
-    } else {
-      setInvestmentData((prevState) => ({
-        ...prevState,
-        sukuBunga: 0,
-      }));
-    }
-  }, [investmentDetails, lastDate, stockBuyback]);
-
-  useEffect(() => {
-    setInvestmentData((prevState) => ({
-      ...prevState,
-      sukuBunga: rates.rateMonth ? rates.rateMonth : 0,
-    }));
-  }, [rates]);
-
-  const onChange = (e) => {
-    setInvestmentData((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value,
-    }));
-  };
-
-  const onSubmit = (e) => {
-    e.preventDefault();
+  const onSubmit = async (event) => {
+    event.preventDefault();
 
     const payload = {
       investId,
-      buyBack,
+      buyBack: formBuyback,
+      date: new Date(),
     };
 
-    if (!buyBack) {
+    if (!formBuyback) {
       toast.error("Mohon isi data buy back! 😣");
     } else {
-      dispatch(addBuyback(payload));
-      dispatch(getInvestmentDetails());
-      setInvestmentData((prevState) => ({
-        ...prevState,
-        buyBack: "",
-      }));
+      await dispatch(addBuyback(payload));
+      dispatch(getInvestmentById(investId));
+      setFormBuyback("");
     }
   };
+
+  if (isLoading) return <SpinnerOverlay />;
 
   return (
     <>
@@ -160,7 +107,6 @@ function InvestmentDetail() {
         className="sub-header"
         onClick={() => {
           navigate(-1);
-          dispatch(reset());
         }}
       >
         <RiArrowLeftSLine />
@@ -171,27 +117,24 @@ function InvestmentDetail() {
         <p className="last-date">
           Data terakhir:{" "}
           {lastDate !== ""
-            ? lastDate.toLocaleString("id-ID", {
+            ? new Date(lastDate).toLocaleString("id-ID", {
                 dateStyle: "long",
               })
             : "Data belum tersedia"}
         </p>
-        <form className="add-buyback" onSubmit={onSubmit}>
+        <form onSubmit={onSubmit} className="add-buyback">
           <label htmlFor="buyBack">Buy back (per {unit && unit})</label>
           <div className="input-btn-buyback">
             <input
               type="number"
-              id="buyBack"
-              name="buyBack"
-              value={buyBack}
+              id="formBuyback"
+              name="formBuyback"
+              value={formBuyback}
               autoComplete="off"
               placeholder="Rp"
-              onChange={onChange}
+              onChange={(event) => setFormBuyback(event.target.value)}
             />
-            <button type="submit">
-              Perbarui
-              {/* {isLoading ? <Spinner /> : "Login"} */}
-            </button>
+            <button type="submit">Perbarui</button>
           </div>
         </form>
         <div className="last-detail">
@@ -206,7 +149,7 @@ function InvestmentDetail() {
             <div className="total-pembelian">
               <h3>Total pembelian</h3>
               <p>
-                {totalPembelian.toLocaleString("id-ID", {
+                {totalPurchases.toLocaleString("id-ID", {
                   style: "currency",
                   currency: "IDR",
                 })}
@@ -216,7 +159,7 @@ function InvestmentDetail() {
             <div className="total-penjualan">
               <h3>Total penjualan</h3>
               <p>
-                {totalPenjualan.toLocaleString("id-ID", {
+                {totalSales.toLocaleString("id-ID", {
                   style: "currency",
                   currency: "IDR",
                 })}
@@ -228,36 +171,39 @@ function InvestmentDetail() {
             <div
               className={
                 "suku-bunga " +
-                (parseFloat(sukuBunga * 100).toFixed(2) >=
-                investmentById?.expected_rate
+                (parseFloat(investmentRate.ratePerYear * 100).toFixed(2) >=
+                expectedRate
                   ? "bg-green"
-                  : parseFloat(sukuBunga * 100).toFixed(2) > 0
+                  : parseFloat(investmentRate.ratePerYear * 100).toFixed(2) > 0
                   ? "bg-yellow"
                   : "bg-red")
               }
             >
               <h3>Suku bunga</h3>
-              <p>{parseFloat(sukuBunga * 100).toFixed(2)} %</p>
+              <p>
+                {investmentRate.ratePerYear
+                  ? parseFloat(investmentRate.ratePerYear * 100).toFixed(2)
+                  : 0}{" "}
+                %
+              </p>
             </div>
             <div
               className={
                 "stock-buyback " +
-                (stockBuyback + totalPenjualan - totalPembelian >=
-                investmentById?.expected_profit
+                (stockToBuyback - (totalPurchases - totalSales) >=
+                expectedProfit
                   ? "bg-green"
-                  : stockBuyback + totalPenjualan - totalPembelian > 0
+                  : stockToBuyback - (totalPurchases - totalSales) > 0
                   ? "bg-yellow"
                   : "bg-red")
               }
             >
               <h3>Stock to Buy Back</h3>
               <p>
-                {stockBuyback
-                  ? stockBuyback.toLocaleString("id-ID", {
-                      style: "currency",
-                      currency: "IDR",
-                    })
-                  : "Rp 0,00"}
+                {stockToBuyback.toLocaleString("id-ID", {
+                  style: "currency",
+                  currency: "IDR",
+                })}
                 {/* Rp 12.930.000,- */}
               </p>
             </div>
@@ -293,7 +239,7 @@ function InvestmentDetail() {
                   <tr key={index}>
                     <td className="text-xs font-normal py-1">
                       {new Date(el.date).toLocaleString("id-ID", {
-                        dateStyle: "medium",
+                        dateStyle: "long",
                       })}
                     </td>
                     <td className="text-xs font-normal py-1">
@@ -306,7 +252,7 @@ function InvestmentDetail() {
                       })}
                     </td>
                     <td className="text-xs font-normal py-1">
-                      {el.buy_back.toLocaleString("id-ID", {
+                      {el.buyBack.toLocaleString("id-ID", {
                         style: "currency",
                         currency: "IDR",
                       })}
@@ -319,22 +265,84 @@ function InvestmentDetail() {
                       />
                       <RiDeleteBin5Line
                         className="delete"
-                        onClick={() =>
-                          dispatch(
-                            deleteInvestmentDetail({
-                              investId,
-                              investDetailId: el._id,
-                            })
-                          )
-                        }
+                        onClick={() => {
+                          setIsModalDelete(true);
+                        }}
                       />
+                      {/* reset confirmation */}
+                      <Modal
+                        isOpen={isModalDelete}
+                        setIsOpen={setIsModalDelete}
+                      >
+                        <p>Apakah anda ingin menghapus data ini?</p>
+                        <div className="delete-confirmation">
+                          <button
+                            className="yes"
+                            onClick={async () => {
+                              await dispatch(
+                                deleteInvestmentDetail({
+                                  investId,
+                                  investDetailId: el._id,
+                                })
+                              );
+                              dispatch(getInvestmentById(investId));
+                              setIsModalDelete(!isModalDelete);
+                            }}
+                          >
+                            Ya
+                          </button>
+                          <button
+                            className="no"
+                            onClick={() => {
+                              setIsModalDelete(!isModalDelete);
+                            }}
+                          >
+                            Tidak
+                          </button>
+                        </div>
+                      </Modal>
                     </td>
                   </tr>
                 ))}
             </tbody>
           </table>
-          {investmentDetails.length === 0 && <div> Data belum tersedia</div>}
+          {investmentDetails?.length === 0 && (
+            <div className="detail-not-found"> Data belum tersedia</div>
+          )}
         </div>
+        {investmentDetails?.length > 0 && (
+          <button
+            onClick={() => setIsModalReset(true)}
+            className="reset-detail"
+          >
+            <MdOutlineRefresh />{" "}
+            <p style={{ marginLeft: "2px", marginBottom: "2px" }}>reset</p>
+          </button>
+        )}
+
+        {/* reset confirmation */}
+        <Modal isOpen={isModalReset} setIsOpen={setIsModalReset}>
+          <p>Apakah anda ingin mereset data rincian investasi anda?</p>
+          <div className="delete-confirmation">
+            <button
+              className="yes"
+              onClick={() => {
+                dispatch(resetInvestmentDetail(investId));
+                setIsModalReset(!isModalReset);
+              }}
+            >
+              Ya
+            </button>
+            <button
+              className="no"
+              onClick={() => {
+                setIsModalReset(!isModalReset);
+              }}
+            >
+              Tidak
+            </button>
+          </div>
+        </Modal>
       </section>
     </>
   );

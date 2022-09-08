@@ -2,20 +2,35 @@ const express = require("express");
 const router = express.Router();
 const {
   getInvestments,
-  setInvestment,
+  getInvestmentDetails,
+  createInvestment,
   updateInvestment,
   deleteInvestment,
-  calculateRate,
+  addBuyBack,
+  buyInvestment,
+  sellInvestment,
+  updateInvestmentDetail,
+  deleteInvestmentDetail,
+  resetInvestmentDetails,
 } = require("../controllers/investmentController");
 const { protect } = require("../middleware/authMiddleware");
 
-router.route("/").get(protect, getInvestments).post(protect, setInvestment);
+// protect middleware
+router.use(protect);
 
-router
-  .route("/:id")
-  .put(protect, updateInvestment)
-  .delete(protect, deleteInvestment);
+// investment routes
+router.post("/", createInvestment);
+router.get("/", getInvestments);
+router.put("/:id", updateInvestment);
+router.delete("/:id", deleteInvestment);
 
-router.post("/calculateRate", protect, calculateRate);
+// investment detail routes
+router.post("/:id/addBuyBack", addBuyBack);
+router.post("/:id/buy", buyInvestment);
+router.post("/:id/sell", sellInvestment);
+router.get("/:id", getInvestmentDetails);
+router.put("/:id/:detailId", updateInvestmentDetail);
+router.delete("/:id/reset", resetInvestmentDetails);
+router.delete("/:id/:detailId", deleteInvestmentDetail);
 
 module.exports = router;

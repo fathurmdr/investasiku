@@ -1,9 +1,19 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { toast } from "react-toastify";
 import authService from "./authService";
+import jwtDecode from "jwt-decode";
 
 // Get user from localStorage
-const user = JSON.parse(localStorage.getItem("user"));
+const token = JSON.parse(localStorage.getItem("token"));
+const jwtToken = token ? atob(token) : null;
+const payload = token ? jwtDecode(jwtToken) : null;
+const user = token
+  ? {
+      _id: payload._id,
+      name: payload.name,
+      email: payload.email,
+      token: jwtToken,
+    }
+  : null;
 
 const initialState = {
   user: user ? user : null,
@@ -68,14 +78,11 @@ export const authSlice = createSlice({
       .addCase(signup.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.user = action.payload;
-        // toast.success("Registrasi berhasil 😎");
       })
       .addCase(signup.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
-        state.user = null;
       })
       .addCase(login.pending, (state) => {
         state.isLoading = true;
@@ -83,8 +90,8 @@ export const authSlice = createSlice({
       .addCase(login.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.user = action.payload;
-        // toast.success("Login berhasil 😎");
+        const payload = jwtDecode(action.payload.token);
+        state.user = { ...payload, ...action.payload };
       })
       .addCase(login.rejected, (state, action) => {
         state.isLoading = false;

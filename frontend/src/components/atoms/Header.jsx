@@ -1,7 +1,8 @@
 function Header(props) {
+  const { title } = props;
   return (
     <header className="header">
-      <h1>{props.headerName}</h1>
+      <h1>{title}</h1>
     </header>
   );
 }
