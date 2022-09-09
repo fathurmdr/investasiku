@@ -77,10 +77,16 @@ input::-webkit-inner-spin-button {
 }
 
 .sub-header{
-  margin-bottom: 28px;
+  z-index: 10;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  max-width: 425px;
+  margin: auto;
   color: #495371;
   padding: 15px 0;
   border-bottom: 4px solid #D6CEA3;
+  background-color: #F1E0AC;
   display: flex;
   justify-content: left;
   align-items: center;
@@ -303,9 +309,13 @@ input::-webkit-inner-spin-button {
   color: #74959A;
 }
 
+.list-investment {
+  position: relative;
+  top: 100px;
+}
+
 .list-menu{
-  padding-top: 100px;
-  padding-bottom: 150px;
+  padding-bottom: 145px;
 }
 
 .list-menu li{
@@ -503,9 +513,12 @@ input::-webkit-inner-spin-button {
 }
 
 .investment-detail{
+  position: relative;
+  top: 90px;
   width: 90%;
   margin: auto;
   position: relative;
+  padding-bottom: 50px;
 }
 
 .investment-detail .last-date{
