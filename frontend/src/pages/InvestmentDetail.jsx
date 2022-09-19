@@ -118,7 +118,7 @@ function InvestmentDetail() {
         <h1>{investName}</h1>
       </header>
 
-      <section className="investment-detail">
+      <section className="investment-detail container-with-header">
         <p className="last-date">
           Data terakhir:{" "}
           {lastDate !== ""

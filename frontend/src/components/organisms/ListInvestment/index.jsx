@@ -32,7 +32,7 @@ function ListInvestment() {
   }, [isError, message]);
 
   return (
-    <div className="list-investment">
+    <div className="container-with-header">
       {isLoading ? (
         <SpinnerOverlay />
       ) : (

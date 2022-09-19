@@ -76,7 +76,7 @@ function EditInvestForm() {
 
   if (isLoading) return <SpinnerOverlay />;
   return (
-    <div className="form">
+    <div className="form container-with-header">
       <form onSubmit={onSubmit}>
         <div className="form-group">
           <label htmlFor="investName">Nama investasi</label>

@@ -78,7 +78,7 @@ function EditInvestmentDetail() {
   return (
     <>
       <SubHeader subHeaderName="Edit Investment Detail" />
-      <section className="form">
+      <section className="form container-with-header">
         <form onSubmit={onSubmit}>
           <div className="form-group">
             <label htmlFor="expected_rate">Tanggal</label>

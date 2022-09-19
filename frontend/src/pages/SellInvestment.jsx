@@ -63,7 +63,7 @@ function SellInvestment() {
   return (
     <>
       <SubHeader subHeaderName="Jual" />
-      <section className="form">
+      <section className="form container-with-header">
         <form onSubmit={onSubmit}>
           <div className="form-group">
             <label htmlFor="expected_rate">Tanggal pembelian</label>

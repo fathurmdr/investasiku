@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
 
 * {
   margin: 0;
@@ -7,23 +7,28 @@
 }
 
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   height: 100vh;
-  background-color: #F1E0AC;
+  background-color: #f1e0ac;
 }
 
-a, a:hover, a:focus, a:active {
+a,
+a:hover,
+a:focus,
+a:active {
   text-decoration: none;
 }
 
-button, input[type="submit"], input[type="reset"] {
-	background: none;
-	color: inherit;
-	border: none;
-	padding: 0;
-	font: inherit;
-	cursor: pointer;
-	outline: inherit;
+button,
+input[type="submit"],
+input[type="reset"] {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
 }
 
 input::-webkit-outer-spin-button,
@@ -39,7 +44,7 @@ input::-webkit-inner-spin-button {
   text-align: center;
 }
 
-.dashboard{
+.dashboard {
   position: fixed;
   top: 0;
   bottom: 0;
@@ -53,8 +58,7 @@ input::-webkit-inner-spin-button {
   text-transform: capitalize;
 }
 
-
-.header{
+.header {
   z-index: 12;
   position: fixed;
   right: 0;
@@ -64,19 +68,19 @@ input::-webkit-inner-spin-button {
   left: 0;
   width: 100%;
   max-width: 425px;
-  background-color: #F1E0AC;
+  background-color: #f1e0ac;
 }
 
-.header h1{
+.header h1 {
   margin-bottom: 28px;
   font-size: 24px;
   font-weight: 600;
   color: #495371;
   padding: 15px 0;
-  border-bottom: 4px solid #D6CEA3;
+  border-bottom: 4px solid #d6cea3;
 }
 
-.sub-header{
+.sub-header {
   z-index: 10;
   position: fixed;
   top: 0;
@@ -85,35 +89,35 @@ input::-webkit-inner-spin-button {
   margin: auto;
   color: #495371;
   padding: 15px 0;
-  border-bottom: 4px solid #D6CEA3;
-  background-color: #F1E0AC;
+  border-bottom: 4px solid #d6cea3;
+  background-color: #f1e0ac;
   display: flex;
   justify-content: left;
   align-items: center;
   cursor: pointer;
 }
 
-.sub-header h1{
+.sub-header h1 {
   font-size: 18px;
   font-weight: 600;
 }
 
-.sub-header svg{
+.sub-header svg {
   font-size: 32px;
   font-weight: 600;
 }
 
-.banner-logo{
+.banner-logo {
   margin: 70px auto;
   font-size: 30px;
 }
 
-.banner-logo h1{
+.banner-logo h1 {
   color: #495371;
 }
 
-.banner-logo h1 span{
-  color: #74959A;
+.banner-logo h1 span {
+  color: #74959a;
 }
 
 .form {
@@ -131,42 +135,42 @@ input::-webkit-inner-spin-button {
   text-align: left;
   display: block;
   margin: 0 0 3px 3px;
-  font-size:small;
-  color:#74959A;
+  font-size: small;
+  color: #74959a;
 }
 
 .form-group input {
   width: 100%;
   padding: 6px;
-  border: 1px solid #74959A;
+  border: 1px solid #74959a;
   border-radius: 5px;
   margin-bottom: 10px;
   font-family: inherit;
-  font-size:small
+  font-size: small;
 }
 
-.form-group input:focus{
-  outline: 1.5px solid #74959A; 
+.form-group input:focus {
+  outline: 1.5px solid #74959a;
 }
 
-.with-prefix{
+.with-prefix {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.with-prefix input{
+.with-prefix input {
   height: 32px;
   border-bottom-left-radius: 0;
   border-top-left-radius: 0;
 }
 
-.with-prefix .prefix{
+.with-prefix .prefix {
   height: 32px;
   font-size: small;
   margin-bottom: 10px;
   padding: 6px;
-  border: 1px #74959A solid;
+  border: 1px #74959a solid;
   border-bottom-left-radius: 5px;
   border-top-left-radius: 5px;
   background-color: #e5e7e9;
@@ -174,11 +178,11 @@ input::-webkit-inner-spin-button {
   align-items: center;
 }
 
-.with-prefix .prefix-svg{
+.with-prefix .prefix-svg {
   height: 32px;
   margin-bottom: 10px;
   padding: 6px;
-  border: 1px #74959A solid;
+  border: 1px #74959a solid;
   border-bottom-left-radius: 5px;
   border-top-left-radius: 5px;
   background-color: #e5e7e9;
@@ -212,21 +216,20 @@ input::-webkit-inner-spin-button {
   transform: scale(0.98);
 }
 
-.btn-logout{
+.btn-logout {
   background-color: #f36060;
   width: 90%;
   margin: 0 auto;
   margin-bottom: 20px;
 }
 
-
-.auth-footer p{
+.auth-footer p {
   font-size: small;
   font-weight: lighter;
   margin-bottom: 20px;
 }
 
-.auth-footer p a{
+.auth-footer p a {
   background-color: transparent;
   border: none;
   font-weight: bold;
@@ -234,7 +237,7 @@ input::-webkit-inner-spin-button {
   cursor: pointer;
 }
 
-.navContainer{
+.navContainer {
   z-index: 11;
   position: fixed;
   right: 0;
@@ -248,10 +251,10 @@ input::-webkit-inner-spin-button {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #F1E0AC;
+  background-color: #f1e0ac;
 }
 
-.nav{
+.nav {
   width: 60px;
   color: #495371;
   background-color: transparent;
@@ -263,21 +266,21 @@ input::-webkit-inner-spin-button {
   cursor: pointer;
 }
 
-.nav:hover{
-  color: #74959A;
+.nav:hover {
+  color: #74959a;
 }
 
-.nav svg{
+.nav svg {
   font-size: 42px;
   margin: 0 auto;
 }
 
-.nav p{
+.nav p {
   margin-top: 2px;
   font-size: x-small;
 }
 
-.add-investment{
+.add-investment {
   z-index: 10;
   position: fixed;
   bottom: 0;
@@ -290,7 +293,7 @@ input::-webkit-inner-spin-button {
   justify-content: right;
 }
 
-.add-investment a{
+.add-investment a {
   width: fit-content;
   height: fit-content;
   background-color: transparent;
@@ -299,34 +302,29 @@ input::-webkit-inner-spin-button {
   margin-right: 10px;
   cursor: pointer;
 }
-.add-investment a svg{
+.add-investment a svg {
   font-size: 55px;
   color: #495371;
-  background-color: #F1E0AC;
+  background-color: #f1e0ac;
   border-radius: 100px;
 }
-.add-investment a svg:hover{
-  color: #74959A;
+.add-investment a svg:hover {
+  color: #74959a;
 }
 
-.list-investment {
-  position: relative;
-  top: 100px;
-}
-
-.list-menu{
+.list-menu {
   padding-bottom: 145px;
 }
 
-.list-menu li{
+.list-menu li {
   color: #495371;
   padding: 12px;
-  border-bottom: 2px solid #D6CEA3;
+  border-bottom: 2px solid #d6cea3;
   display: flex;
   align-items: center;
 }
 
-.list-menu li .detail{
+.list-menu li .detail {
   flex-grow: 1;
   display: flex;
   justify-content: space-between;
@@ -334,19 +332,19 @@ input::-webkit-inner-spin-button {
   cursor: pointer;
 }
 
-.list-menu li .detail:hover{
-  color: #74959A;
+.list-menu li .detail:hover {
+  color: #74959a;
 }
 
-.list-menu li .detail svg{
+.list-menu li .detail svg {
   font-size: 32px;
 }
 
-.list-menu li .menu-option{
+.list-menu li .menu-option {
   position: relative;
 }
 
-.list-menu li .menu-option .option-btn{
+.list-menu li .menu-option .option-btn {
   color: inherit;
   background-color: transparent;
   border: none;
@@ -356,7 +354,7 @@ input::-webkit-inner-spin-button {
   cursor: pointer;
 }
 
-.list-menu li .menu-option .option-btn svg{
+.list-menu li .menu-option .option-btn svg {
   margin-left: 2px;
   padding: 4px;
   width: 28px;
@@ -366,26 +364,26 @@ input::-webkit-inner-spin-button {
   align-items: center;
 }
 
-.list-menu li .menu-option .option-btn svg:hover{
+.list-menu li .menu-option .option-btn svg:hover {
   border-radius: 50px;
-  outline: #74959A 3px solid;
-  color: #74959A;
+  outline: #74959a 3px solid;
+  color: #74959a;
 }
 
-.list-menu li .menu-option .options{
+.list-menu li .menu-option .options {
   position: absolute;
   padding: 2px 0;
   z-index: 100;
   right: 0;
   top: 38px;
   width: 140px;
-  border: 1px solid #74959A;
+  border: 1px solid #74959a;
   border-radius: 6px;
   background-color: #f9f9f9;
   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.15);
 }
 
-.list-menu li .menu-option .options div{
+.list-menu li .menu-option .options div {
   margin: 4px 4px;
   padding: 4px 0px;
   border-radius: 3px;
@@ -394,20 +392,20 @@ input::-webkit-inner-spin-button {
   cursor: pointer;
 }
 
-.list-menu li .menu-option .options div:hover{
-  background-color: #74959A;
+.list-menu li .menu-option .options div:hover {
+  background-color: #74959a;
   color: #fff;
 }
 
-.list-menu li .menu-option .options .delete:hover{
+.list-menu li .menu-option .options .delete:hover {
   background-color: #f36060;
   color: #fff;
 }
 
-.list-menu li .menu-option .options .divider{
+.list-menu li .menu-option .options .divider {
   margin: 0;
   padding: 0 0 1px 0;
-  background-color: #74959A;
+  background-color: #74959a;
 }
 
 .loadingSpinnerOverlayContainer {
@@ -427,7 +425,7 @@ input::-webkit-inner-spin-button {
   width: 48px;
   height: 48px;
   border: 6px solid;
-  border-color:  #495371 #495371 #495371 transparent;
+  border-color: #495371 #495371 #495371 transparent;
   border-radius: 50%;
   animation: spin 1.2s linear infinite;
 }
@@ -448,11 +446,11 @@ input::-webkit-inner-spin-button {
   animation: spin 1.2s linear infinite;
 }
 
-.list-investment .loadingSpinner{
+.list-investment .loadingSpinner {
   border-color: #495371 #495371 #495371 transparent;
 }
 
-.modals-overlay{
+.modals-overlay {
   z-index: 100;
   position: fixed;
   width: 100vw;
@@ -464,7 +462,7 @@ input::-webkit-inner-spin-button {
   background: rgba(0, 0, 0, 0.15);
 }
 
-.modals-container{
+.modals-container {
   z-index: 200;
   position: fixed;
   margin: auto;
@@ -478,92 +476,89 @@ input::-webkit-inner-spin-button {
   bottom: 0;
   background-color: #fff;
   border-radius: 8px;
-  border: #74959A 1px solid;
+  border: #74959a 1px solid;
   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.15);
   font-size: 14px;
-
 }
 
-.modals-container p{
+.modals-container p {
   padding: 8px 4px;
 }
-.modals-container .delete-confirmation{
+.modals-container .delete-confirmation {
   margin: 4px auto;
   width: 50%;
   display: flex;
   justify-content: space-around;
 }
 
-.modals-container .delete-confirmation button{
+.modals-container .delete-confirmation button {
   width: 50px;
   padding: 4px 0;
-  border: 1px #74959A solid;
+  border: 1px #74959a solid;
   border-radius: 4px;
   cursor: pointer;
   /* box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.15); */
 }
 
-.modals-container .delete-confirmation .yes{
+.modals-container .delete-confirmation .yes {
   background-color: #f36060;
   color: #fff;
 }
-.modals-container .delete-confirmation .no{
+.modals-container .delete-confirmation .no {
   background-color: #495371;
   color: #fff;
 }
 
-.investment-detail{
-  position: relative;
-  top: 90px;
+.investment-detail {
   width: 90%;
   margin: auto;
   position: relative;
   padding-bottom: 50px;
 }
 
-.investment-detail .last-date{
-  color: #74959A;
+.investment-detail .last-date {
+  color: #74959a;
   text-align: left;
   font-size: small;
   margin-bottom: 16px;
 }
 
-.investment-detail .add-buyback{
+.investment-detail .add-buyback {
   width: 95%;
   margin: auto;
 }
 
-.investment-detail .add-buyback label{
-  color: #74959A;
+.investment-detail .add-buyback label {
+  color: #74959a;
   display: block;
   text-align: left;
   margin-bottom: 4px;
 }
 
-.investment-detail .add-buyback .input-btn-buyback{
+.investment-detail .add-buyback .input-btn-buyback {
   margin-bottom: 24px;
   display: flex;
 }
 
-.investment-detail .add-buyback .input-btn-buyback input{
+.investment-detail .add-buyback .input-btn-buyback input {
   padding: 4px 6px;
   margin-right: 4px;
-  border: 1px solid #74959A;
+  border: 1px solid #74959a;
   border-radius: 5px;
   font-family: inherit;
-  font-size:small
+  font-size: small;
 }
 
-.investment-detail .add-buyback .input-btn-buyback input:focus{
-  outline: 1px solid #74959A;
+.investment-detail .add-buyback .input-btn-buyback input:focus {
+  outline: 1px solid #74959a;
 }
 
-.investment-detail .add-buyback .input-btn-buyback button{
+.investment-detail .add-buyback .input-btn-buyback button {
   padding: 4px 8px;
   border: none;
   border-radius: 5px;
   font-family: inherit;
-  font-size:small;
+  font-size: small;
   background-color: #495371;
   color: #fff;
   cursor: pointer;
@@ -573,7 +568,7 @@ input::-webkit-inner-spin-button {
   transform: scale(0.98);
 }
 
-.investment-detail .last-detail{
+.investment-detail .last-detail {
   display: flex;
   align-items: center;
   width: 95%;
@@ -581,35 +576,35 @@ input::-webkit-inner-spin-button {
   margin-bottom: 8px;
 }
 
-.investment-detail .last-detail .left{
+.investment-detail .last-detail .left {
   width: 50%;
   text-align: left;
   font-size: 12px;
 }
 
-.investment-detail .last-detail .left h3{
+.investment-detail .last-detail .left h3 {
   font-weight: 600;
-  color: #74959A;
+  color: #74959a;
 }
 
-.investment-detail .last-detail .left p{
+.investment-detail .last-detail .left p {
   font-weight: 600;
   color: #495371;
   margin-bottom: 12px;
 }
 
-.investment-detail .last-detail .right{
+.investment-detail .last-detail .right {
   width: 50%;
   font-size: 12px;
 }
 
-.investment-detail .last-detail .right h3{
+.investment-detail .last-detail .right h3 {
   font-weight: 600;
   color: #495371;
   margin-bottom: 6px;
 }
 
-.investment-detail .last-detail .right p{
+.investment-detail .last-detail .right p {
   font-weight: 400;
   margin: auto;
   padding: 8px 10px;
@@ -620,18 +615,18 @@ input::-webkit-inner-spin-button {
   margin-bottom: 16px;
 }
 
-.investment-detail .last-detail .right .bg-red p{
-  background: #f36060
+.investment-detail .last-detail .right .bg-red p {
+  background: #f36060;
 }
-.investment-detail .last-detail .right .bg-yellow p{
+.investment-detail .last-detail .right .bg-yellow p {
   background: #fff192;
   color: #495371;
 }
-.investment-detail .last-detail .right .bg-green p{
-  background: #32b330
+.investment-detail .last-detail .right .bg-green p {
+  background: #32b330;
 }
 
-.investment-detail .buy-or-sell{
+.investment-detail .buy-or-sell {
   width: 95%;
   margin: auto;
   margin-bottom: 16px;
@@ -640,7 +635,7 @@ input::-webkit-inner-spin-button {
   align-items: center;
 }
 
-.investment-detail .buy-or-sell button{
+.investment-detail .buy-or-sell button {
   padding: 8px 18px;
   border-radius: 10px;
   border: none;
@@ -655,19 +650,19 @@ input::-webkit-inner-spin-button {
   transform: scale(0.98);
 }
 
-.investment-detail .buy-or-sell button svg{
+.investment-detail .buy-or-sell button svg {
   margin-right: 4px;
 }
 
-.investment-detail .table-detail{
+.investment-detail .table-detail {
   overflow: auto;
   margin: auto;
   max-height: 195px;
-  border-bottom: solid 1px #74959A;
+  border-bottom: solid 1px #74959a;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.investment-detail .table-detail::-webkit-scrollbar{
+.investment-detail .table-detail::-webkit-scrollbar {
   width: 10px;
   height: 10px;
 }
@@ -686,15 +681,15 @@ input::-webkit-inner-spin-button {
 }
 
 /* Handle on hover */
-.investment-detail .table-detail:hover::-webkit-scrollbar-thumb{
-  background-color: #74959A;
+.investment-detail .table-detail:hover::-webkit-scrollbar-thumb {
+  background-color: #74959a;
 }
 
 .investment-detail .table-detail::-webkit-scrollbar-corner {
-  background: transparent
+  background: transparent;
 }
 
-.investment-detail .table-detail table{
+.investment-detail .table-detail table {
   position: relative;
   table-layout: auto;
   width: 600px;
@@ -703,39 +698,39 @@ input::-webkit-inner-spin-button {
   border-collapse: separate;
 }
 
-.investment-detail .table-detail table th{
-  background-color: #D6CEA3;
-  border-top: 1px solid #74959A;
-  border-bottom: 1px solid #74959A;
+.investment-detail .table-detail table th {
+  background-color: #d6cea3;
+  border-top: 1px solid #74959a;
+  border-bottom: 1px solid #74959a;
   position: sticky;
   top: 0;
   font-weight: 600;
   padding: 2px;
 }
 
-.investment-detail .table-detail table td{
+.investment-detail .table-detail table td {
   font-weight: 300;
   padding-top: 10px;
-  
+
   /* border-bottom: 1px solid #74959A; */
 }
 
-.investment-detail .table-detail table .table-action{
+.investment-detail .table-detail table .table-action {
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 22px;
 }
 
-.investment-detail .table-detail table .table-action .edit{
+.investment-detail .table-detail table .table-action .edit {
   border-radius: 4px;
   padding: 2px;
-  background-color: #74959A;
+  background-color: #74959a;
   color: #0d4b55;
   cursor: pointer;
 }
 
-.investment-detail .table-detail table .table-action .delete{
+.investment-detail .table-detail table .table-action .delete {
   border-radius: 4px;
   padding: 2px;
   background-color: #f36060;
@@ -743,19 +738,19 @@ input::-webkit-inner-spin-button {
   cursor: pointer;
 }
 
-.investment-detail .table-detail table .table-action svg{
+.investment-detail .table-detail table .table-action svg {
   /* padding: 2px 2px; */
   margin: 0px 4px;
 }
 
-.reset-detail{
+.reset-detail {
   position: absolute;
   right: 0;
   margin: 4px;
   padding: 2px 6px 1px 4px;
   background-color: #f36060;
   border-radius: 5px;
-  border: solid 1px #74959A;
+  border: solid 1px #74959a;
   color: #f9f9f9;
   font-size: 14px;
   display: flex;
@@ -763,16 +758,14 @@ input::-webkit-inner-spin-button {
   align-items: center;
 }
 
-.reset-detail:hover{
-  transform: scale(0.98)
+.reset-detail:hover {
+  transform: scale(0.98);
 }
 
-.detail-not-found{
+.detail-not-found {
   margin-top: 8px;
   font-size: 14px;
 }
-
-
 
 @keyframes spin {
   0% {
@@ -781,4 +774,9 @@ input::-webkit-inner-spin-button {
   100% {
     transform: rotate(360deg);
   }
+}
+
+.container-with-header {
+  position: relative;
+  top: 100px;
 }

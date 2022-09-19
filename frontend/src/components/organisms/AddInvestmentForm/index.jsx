@@ -45,7 +45,7 @@ function AddInvestmentForm() {
     }
   };
   return (
-    <div className="form">
+    <div className="form container-with-header">
       <form onSubmit={onSubmit}>
         <div className="form-group">
           <label htmlFor="investName">Nama investasi</label>
@@ -62,7 +62,6 @@ function AddInvestmentForm() {
         </div>
         <div className="form-group">
           <label htmlFor="expectedRate">Imbal hasil yang diharapkan</label>
-
           <div className="with-prefix">
             <div className="prefix">%</div>
             <input
