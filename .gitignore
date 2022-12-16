@@ -1,4 +1,30 @@
+<<<<<<< HEAD
 node_modules
 .env
 notes.txt
 API Specification.txt
+=======
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+>>>>>>> febead5c18341bb4206d0fd1a0fe0a7841c77e80
